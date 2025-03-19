@@ -98,7 +98,7 @@ cd
 echo 'deb http://download.opensuse.org/repositories/home:/ra3xdh/xUbuntu_24.04/ /' | sudo tee /etc/apt/sources.list.d/home:ra3xdh.list
 curl -fsSL https://download.opensuse.org/repositories/home:ra3xdh/xUbuntu_24.04/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_ra3xdh.gpg > /dev/null
 sudo apt update
-sudo apt install qucs-s ngspice
+sudo apt install -y qucs-s ngspice 
 
 echo 'export PATH="$PATH:$HOME/microelectronics/tools/"' >> ~/.bashrc
 export PATH="$PATH:$HOME/microelectronics/tools/"
@@ -123,7 +123,7 @@ user_verification "Vérification de l'utilisateur. Continuer ?"
 echo "Installation de OpenEMS..."
 # Ajoutez ici les commandes pour installer OpenEMS
 cd
-sudo apt install build-essential cmake git libhdf5-dev libvtk9-dev libboost-all-dev libcgal-dev libtinyxml-dev qtbase5-dev libvtk9-qt-dev python3-numpy python3-matplotlib cython3 python3-h5py python3-gdspy
+sudo apt install -y build-essential cmake git libhdf5-dev libvtk9-dev libboost-all-dev libcgal-dev libtinyxml-dev qtbase5-dev libvtk9-qt-dev python3-numpy python3-matplotlib cython3 python3-h5py python3-gdspy
 cd ~microelectronics/tools_sources
 git clone --recursive https://github.com/thliebig/openEMS-Project.git
 cd openEMS-Project
