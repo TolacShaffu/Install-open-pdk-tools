@@ -14,7 +14,7 @@ function user_verification {
         user_verification "$1"
     fi
 }
-
+cd
 # Étape 1: Installation des dépendances
 echo "Installation des dépendances..."
 sudo apt-get install -y build-essential
@@ -52,6 +52,7 @@ user_verification "Dépendances installées. Continuer ?"
 
 # Étape 2: Création des répertoires
 echo "Création des répertoires..."
+cd
 mkdir microelectronics
 cd microelectronics
 mkdir PDK
