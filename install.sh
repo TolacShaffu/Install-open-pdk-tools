@@ -74,6 +74,11 @@ cd microelectronics/PDK/IHP
 git clone --recursive https://github.com/IHP-GmbH/IHP-Open-PDK.git
 cd IHP-Open-PDK
 git checkout dev
+echo "export PDK_ROOT=\$HOME/microelectronics/PDK/IHP/IHP-Open-PDK" >> ~/.bashrc
+echo "export PDK=ihp-sg13g2" >> ~/.bashrc
+echo "export KLAYOUT_PATH=\"\$HOME/.klayout:\$PDK_ROOT/\$PDK/libs.tech/klayout\"" >> ~/.bashrc
+echo "export KLAYOUT_HOME=\$HOME/.klayout" >> ~/.bashrc
+source ~/.bashrc
 
 user_verification "IHP installé. Continuer ?"
 
@@ -89,10 +94,24 @@ user_verification "Openvaf tiré. Continuer ?"
 # Étape 5: Installation de QUCS
 echo "Installation de QUCS..."
 # Ajoutez ici les commandes pour installer QUCS
+cd
 echo 'deb http://download.opensuse.org/repositories/home:/ra3xdh/xUbuntu_24.04/ /' | sudo tee /etc/apt/sources.list.d/home:ra3xdh.list
 curl -fsSL https://download.opensuse.org/repositories/home:ra3xdh/xUbuntu_24.04/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_ra3xdh.gpg > /dev/null
 sudo apt update
 sudo apt install qucs-s ngspice
+
+echo 'export PATH="$PATH:$HOME/microelectronics/tools/"' >> ~/.bashrc
+export PATH="$PATH:$HOME/microelectronics/tools/"
+
+cd ~/microelectronics/PDK/IHP/IHP-Open-PDK/ihp-sg13g2/libs.tech/qucs
+export PDK_ROOT="$HOME/microelectronics/PDK/IHP/IHP-Open-PDK"
+python3 install.py
+
+echo 'export PDK_ROOT="$HOME/microelectronics/PDK/IHP/IHP-Open-PDK"' >> ~/.bashrc
+echo 'export PDK="ihp-sg13g2"' >> ~/.bashrc
+export PDK_ROOT="$HOME/microelectronics/PDK/IHP/IHP-Open-PDK"
+export PDK="ihp-sg13g2"
+
 qucs-s
 
 user_verification "QUCS installé. Continuer ?"
@@ -103,6 +122,16 @@ user_verification "Vérification de l'utilisateur. Continuer ?"
 # Étape 7: Installation de OpenEMS
 echo "Installation de OpenEMS..."
 # Ajoutez ici les commandes pour installer OpenEMS
+cd
+sudo apt install build-essential cmake git libhdf5-dev libvtk9-dev libboost-all-dev libcgal-dev libtinyxml-dev qtbase5-dev libvtk9-qt-dev python3-numpy python3-matplotlib cython3 python3-h5py python3-gdspy
+cd ~microelectronics/tools_sources
+git clone --recursive https://github.com/thliebig/openEMS-Project.git
+cd openEMS-Project
+./update_openEMS.sh ~/microelectronics/tools/openEMS --python
+echo 'export PATH="$PATH:$HOME/microelectronics/tools/openEMS/bin"' >> ~/.bashrc
+export PATH="$PATH:$HOME/microelectronics/tools/openEMS/bin"
+cd ~/microelectronics/PDK/IHP/IHP-Open-PDK/ihp-sg13g2/libs.tech/openems/testcase/SG13_Octagon_L2n0/OpenEMS_Python/
+python3.12 SG13_L2n0_mesh1.5um_v2.py
 
 user_verification "OpenEMS installé. Continuer ?"
 
