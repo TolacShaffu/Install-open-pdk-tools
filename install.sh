@@ -87,8 +87,11 @@ user_verification "IHP installé. Continuer ?"
 echo "Tirage de Openvaf..."
 # Ajoutez ici les commandes pour tirer Openvaf
 cd ~microelectronics/tools
-wget https://openva.fra1.cdn.digitaloceanspaces.com/openvaf_23_5_0_linux_amd64.tar.gz
+wget https://openva.fra1.cdn.digitaloceanspaces.com/
+openvaf_23_5_0_linux_amd64.tar.gz
 tar -xf openvaf_23_5_0_linux_amd64.tar.gz
+sudo chmod +x openvaf
+openvaf
 
 user_verification "Openvaf tiré. Continuer ?"
 
