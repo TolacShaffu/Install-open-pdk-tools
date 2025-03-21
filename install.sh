@@ -74,10 +74,10 @@ echo "Installation de IHP..."
 cd microelectronics/PDK/IHP
 git clone --recursive https://github.com/IHP-GmbH/IHP-Open-PDK.git
 cd IHP-Open-PDK
-export PDK_ROOT=\$HOME/microelectronics/PDK/IHP/IHP-Open-PDK >> ~/.bashrc
-export PDK=ihp-sg13g2 >> ~/.bashrc
-export KLAYOUT_PATH="\$HOME/.klayout:\$PDK_ROOT/\$PDK/libs.tech/klayout >> ~/.bashrc
-export KLAYOUT_HOME="\$HOME/.klayout >> ~/.bashrc
+echo "export PDK_ROOT=\$HOME/your_directory/IHP-Open-PDK" >> ~/.bashrc
+echo "export PDK=ihp-sg13g2" >> ~/.bashrc
+echo "export KLAYOUT_PATH=\"\$HOME/.klayout:\$PDK_ROOT/\$PDK/libs.tech/klayout\"" >> ~/.bashrc
+echo "export KLAYOUT_HOME=\$HOME/.klayout" >> ~/.bashrc
 source ~/.bashrc
 
 user_verification "IHP installé. Continuer ?"
