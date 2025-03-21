@@ -1,4 +1,4 @@
-#!/bin/bash
+o #!/bin/bash
 
 # Fonction pour afficher un message et attendre la validation de l'utilisateur
 function user_verification {
@@ -102,7 +102,7 @@ curl -fsSL https://download.opensuse.org/repositories/home:ra3xdh/xUbuntu_24.04/
 sudo apt update
 sudo apt install -y qucs-s ngspice 
 
-export PATH="$PATH:$HOME/microelectronics/tools/" >> ~/.bashrc
+echo "export PATH="$PATH:$HOME/microelectronics/tools/"" >> ~/.bashrc
 export PATH="$PATH:$HOME/microelectronics/tools/"
 source ~/.bashrc
 
