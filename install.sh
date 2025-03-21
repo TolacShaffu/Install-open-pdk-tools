@@ -74,10 +74,10 @@ echo "Installation de IHP..."
 cd microelectronics/PDK/IHP
 git clone --recursive https://github.com/IHP-GmbH/IHP-Open-PDK.git
 cd IHP-Open-PDK
-echo "export PDK_ROOT=\$HOME/microelectronics/PDK/IHP/IHP-Open-PDK" >> ~/.bashrc
-echo "export PDK=ihp-sg13g2" >> ~/.bashrc
-echo "export KLAYOUT_PATH="\$HOME/.klayout:\$PDK_ROOT/\$PDK/libs.tech/klayout" >> ~/.bashrc
-echo "export KLAYOUT_HOME="\$HOME/.klayout" >> ~/.bashrc
+export PDK_ROOT=\$HOME/microelectronics/PDK/IHP/IHP-Open-PDK >> ~/.bashrc
+export PDK=ihp-sg13g2 >> ~/.bashrc
+export KLAYOUT_PATH="\$HOME/.klayout:\$PDK_ROOT/\$PDK/libs.tech/klayout >> ~/.bashrc
+export KLAYOUT_HOME="\$HOME/.klayout >> ~/.bashrc
 source ~/.bashrc
 
 user_verification "IHP installé. Continuer ?"
@@ -102,7 +102,7 @@ curl -fsSL https://download.opensuse.org/repositories/home:ra3xdh/xUbuntu_24.04/
 sudo apt update
 sudo apt install -y qucs-s ngspice 
 
-echo 'export PATH="$PATH:$HOME/microelectronics/tools/"' >> ~/.bashrc
+export PATH="$PATH:$HOME/microelectronics/tools/" >> ~/.bashrc
 export PATH="$PATH:$HOME/microelectronics/tools/"
 source ~/.bashrc
 
@@ -125,7 +125,7 @@ cd ~microelectronics/tools_sources
 git clone --recursive https://github.com/thliebig/openEMS-Project.git
 cd openEMS-Project
 ./update_openEMS.sh ~/microelectronics/tools/openEMS --python
-echo 'export PATH="$PATH:$HOME/microelectronics/tools/openEMS/bin"' >> ~/.bashrc
+export PATH="$PATH:$HOME/microelectronics/tools/openEMS/bin" >> ~/.bashrc
 export PATH="$PATH:$HOME/microelectronics/tools/openEMS/bin"
 
 user_verification "OpenEMS installé. Continuer ?"
@@ -150,31 +150,5 @@ user_verification "Klayout installé. Continuer ?"
 klayout &
 # Étape 10: Vérification de l'utilisateur
 user_verification "Vérification de l'utilisateur. Continuer ?"
-
-# Étape 11: Installation de Ngspice
-echo "Installation de Ngspice..."
-# Ajoutez ici les commandes pour installer Ngspice
-sudo apt install autoconf libtool automake libxaw7-dev libreadline-dev
-cd ~microelectronics/tools_sources
-git clone https://github.com/imr/ngspice
-cd ngspice
-git switch pre-master-44
-./autogen.sh
-mkdir release && cd release
-../configure --with-x --enable-cider --enable-predictor
-make 2>&1 | tee make.log
-sudo make install
-
-user_verification "Ngspice installé. Continuer ?"
-
-# Étape 12: Installation de Openvaf
-echo "Installation de Openvaf..."
-# Ajoutez ici les commandes pour installer Openvaf
-sudo apt install clang clang-tools llvm lld cargo
-sudo update-alternatives --install /usr/bin/clang-cl clang-cl /usr/bin/clang-cl-18 1
-rustc --version
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-
-user_verification "Openvaf installé. Continuer ?"
 
 echo "Installation terminée avec succès."
