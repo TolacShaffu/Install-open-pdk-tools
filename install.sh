@@ -134,10 +134,10 @@ cd openEMS-Project
 ./update_openEMS.sh ~/microelectronics/tools/openEMS --python
 echo 'export PATH="$PATH:$HOME/microelectronics/tools/openEMS/bin"' >> ~/.bashrc
 export PATH="$PATH:$HOME/microelectronics/tools/openEMS/bin"
-cd ~/microelectronics/PDK/IHP/IHP-Open-PDK/ihp-sg13g2/libs.tech/openems/testcase/SG13_Octagon_L2n0/OpenEMS_Python/
-python3.12 SG13_L2n0_mesh1.5um_v2.py
 
 user_verification "OpenEMS installé. Continuer ?"
+cd ~/microelectronics/PDK/IHP/IHP-Open-PDK/ihp-sg13g2/libs.tech/openems/testcase/SG13_Octagon_L2n0/OpenEMS_Python/
+python3.12 SG13_L2n0_mesh1.5um_v2.py
 
 # Étape 8: Vérification de l'utilisateur
 user_verification "Vérification de l'utilisateur. Continuer ?"
@@ -145,21 +145,42 @@ user_verification "Vérification de l'utilisateur. Continuer ?"
 # Étape 9: Installation de Klayout
 echo "Installation de Klayout..."
 # Ajoutez ici les commandes pour installer Klayout
+sudo apt install klayout
+mkdir -p  ~/.klayout/tech
+ln -s ~/microelectronics/PDK/IHP/IHP-Open-PDK/ihp-sg13g2/libs.tech/klayout/tech ~/.klayout/tech/ihp-sg13g2
+ln -s ~/.klayout/tech/ihp-sg13g2/sg13g2.lyp ~/.klayout/tech/
+mkdir -p  ~/.klayout/python
+ln -s ~/microelectronics/PDK/IHP/IHP-Open-PDK/ihp-sg13g2/libs.tech/klayout/python/* ~/.klayout/python/
 
 user_verification "Klayout installé. Continuer ?"
 
+klayout &
 # Étape 10: Vérification de l'utilisateur
 user_verification "Vérification de l'utilisateur. Continuer ?"
 
 # Étape 11: Installation de Ngspice
 echo "Installation de Ngspice..."
 # Ajoutez ici les commandes pour installer Ngspice
+sudo apt install autoconf libtool automake libxaw7-dev libreadline-dev
+cd ~microelectronics/tools_sources
+git clone https://github.com/imr/ngspice
+cd ngspice
+git switch pre-master-44
+./autogen.sh
+mkdir release && cd release
+../configure --with-x --enable-cider --enable-predictor
+make 2>&1 | tee make.log
+sudo make install
 
 user_verification "Ngspice installé. Continuer ?"
 
 # Étape 12: Installation de Openvaf
 echo "Installation de Openvaf..."
 # Ajoutez ici les commandes pour installer Openvaf
+sudo apt install clang clang-tools llvm lld cargo
+sudo update-alternatives --install /usr/bin/clang-cl clang-cl /usr/bin/clang-cl-18 1
+rustc --version
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 user_verification "Openvaf installé. Continuer ?"
 
