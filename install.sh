@@ -77,7 +77,7 @@ cd IHP-Open-PDK
 git checkout dev
 echo "export PDK_ROOT=\$HOME/microelectronics/PDK/IHP/IHP-Open-PDK" >> ~/.bashrc
 echo "export PDK=ihp-sg13g2" >> ~/.bashrc
-echo "export KLAYOUT_PATH=\"\$HOME/.klayout:\$PDK_ROOT/\$PDK/libs.tech/klayout\"" >> ~/.bashrc
+echo "export KLAYOUT_PATH="\$HOME/.klayout:\$PDK_ROOT/\$PDK/libs.tech/klayout" >> ~/.bashrc
 echo "export KLAYOUT_HOME=\$HOME/.klayout" >> ~/.bashrc
 source ~/.bashrc
 
@@ -87,11 +87,9 @@ user_verification "IHP installé. Continuer ?"
 echo "Tirage de Openvaf..."
 # Ajoutez ici les commandes pour tirer Openvaf
 cd ~microelectronics/tools
-wget https://openva.fra1.cdn.digitaloceanspaces.com/
-openvaf_23_5_0_linux_amd64.tar.gz
-tar -xf openvaf_23_5_0_linux_amd64.tar.gz
+wget https://datashare.tu-dresden.de/s/deELsiBGyitSS3o/download/openvaf_devel-x86_64-unknown-linux-gnu.tar.gz
+tar -xvf openvaf_23_5_0_linux_amd64.tar.gz
 sudo chmod +x openvaf
-openvaf
 
 user_verification "Openvaf tiré. Continuer ?"
 
@@ -106,15 +104,10 @@ sudo apt install -y qucs-s ngspice
 
 echo 'export PATH="$PATH:$HOME/microelectronics/tools/"' >> ~/.bashrc
 export PATH="$PATH:$HOME/microelectronics/tools/"
+source ~/.bashrc
 
 cd ~/microelectronics/PDK/IHP/IHP-Open-PDK/ihp-sg13g2/libs.tech/qucs
-export PDK_ROOT="$HOME/microelectronics/PDK/IHP/IHP-Open-PDK"
 python3 install.py
-
-echo 'export PDK_ROOT="$HOME/microelectronics/PDK/IHP/IHP-Open-PDK"' >> ~/.bashrc
-echo 'export PDK="ihp-sg13g2"' >> ~/.bashrc
-export PDK_ROOT="$HOME/microelectronics/PDK/IHP/IHP-Open-PDK"
-export PDK="ihp-sg13g2"
 
 qucs-s
 
