@@ -74,11 +74,10 @@ echo "Installation de IHP..."
 cd microelectronics/PDK/IHP
 git clone --recursive https://github.com/IHP-GmbH/IHP-Open-PDK.git
 cd IHP-Open-PDK
-git checkout dev
 echo "export PDK_ROOT=\$HOME/microelectronics/PDK/IHP/IHP-Open-PDK" >> ~/.bashrc
 echo "export PDK=ihp-sg13g2" >> ~/.bashrc
 echo "export KLAYOUT_PATH="\$HOME/.klayout:\$PDK_ROOT/\$PDK/libs.tech/klayout" >> ~/.bashrc
-echo "export KLAYOUT_HOME=\$HOME/.klayout" >> ~/.bashrc
+echo "export KLAYOUT_HOME="\$HOME/.klayout" >> ~/.bashrc
 source ~/.bashrc
 
 user_verification "IHP installé. Continuer ?"
@@ -86,9 +85,10 @@ user_verification "IHP installé. Continuer ?"
 # Étape 4: Tirage de Openvaf
 echo "Tirage de Openvaf..."
 # Ajoutez ici les commandes pour tirer Openvaf
+
 cd ~microelectronics/tools
 wget https://datashare.tu-dresden.de/s/deELsiBGyitSS3o/download/openvaf_devel-x86_64-unknown-linux-gnu.tar.gz
-tar -xvf openvaf_23_5_0_linux_amd64.tar.gz
+tar -xzf openvaf_23_5_0_linux_amd64.tar.gz
 sudo chmod +x openvaf
 
 user_verification "Openvaf tiré. Continuer ?"
